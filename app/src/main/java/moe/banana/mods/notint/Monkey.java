@@ -17,11 +17,9 @@ public class Monkey implements IXposedHookLoadPackage {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 Object obj = param.thisObject;
-                XposedBridge.log("Re-write " + className + "." + varName + "...");
                 Field field = obj.getClass().getDeclaredField(varName);
                 field.setAccessible(true);
                 field.set(obj, value);
-                XposedBridge.log("Re-write " + className + "." + varName + "... success.");
             }
         });
     }
